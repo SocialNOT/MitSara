@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: "Cormorant Garamond", serif;
+  --font-sans: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Indian Flag Inspired Palette */
+  --color-saffron: #FF9933;
+  --color-gold: #D4AF37;
+  --color-india-green: #138808;
+  --color-ashoka-blue: #000080;
+  --color-deep-charcoal: #121212;
+  --color-off-white: #F8F9FA;
+}
+
+@layer base {
+  :root {
+    --bg-primary: #F8F9FA;
+    --text-primary: #121212;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(0, 0, 0, 0.1);
+  }
+
+  .dark {
+    --bg-primary: #121212;
+    --text-primary: #F8F9FA;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    @apply font-sans selection:bg-saffron/30 transition-colors duration-500;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+/* Glass Component Enhancements */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  transition: all 0.3s ease;
+}
+
+/* Interactive Feedback for elements within .glass */
+.glass button, 
+.glass a, 
+.glass .interactive-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass button:hover, 
+.glass a:hover, 
+.glass .interactive-card:hover {
+  transform: scale(1.03);
+  border-color: var(--color-saffron);
+  box-shadow: 0 0 20px rgba(255, 153, 51, 0.2);
+}
+
+/* Hero Section Mandala Pulse */
+.absolute.inset-0.flex.items-center.justify-center.opacity-20 {
+  animation: mandala-pulse 8s ease-in-out infinite;
+}
+
+@keyframes mandala-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.15; }
+  50% { transform: scale(1.1); opacity: 0.3; }
+}
+
+/* Dynamic Hero Background */
+.relative.inset-0.z-0 {
+  background: linear-gradient(135deg, var(--bg-primary) 0%, rgba(255, 153, 51, 0.05) 50%, rgba(19, 136, 8, 0.05) 100%);
+  background-size: 400% 400%;
+  animation: dynamic-bg 15s ease infinite;
+}
+
+@keyframes dynamic-bg {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Sophisticated Loading State */
+.loading {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+.loading::before {
+  content: '';
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-saffron) 0%, transparent 70%);
+  animation: loading-glow 2s ease-in-out infinite;
+  filter: blur(20px);
+  opacity: 0.6;
+}
+
+@keyframes loading-glow {
+  0%, 100% { transform: scale(0.8); opacity: 0.3; }
+  50% { transform: scale(1.2); opacity: 0.7; }
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-saffron via-ashoka-blue to-india-green;
+}
+
+.mandala-glow {
+  background: radial-gradient(circle at center, rgba(255, 153, 51, 0.15) 0%, transparent 70%);
+}
+
